@@ -16,13 +16,14 @@ const jobsRouter=require('./routes/jobs')
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
+const verifyToken = require('./middleware/authentication')
 
 app.use(express.json());
 // extra packages
 
 // routes
 app.use('/api/v1/auth',authRouter);
-app.use('/api/v1/jobs',jobsRouter)
+app.use('/api/v1/jobs',verifyToken,jobsRouter)
 
 
 app.use(notFoundMiddleware);
